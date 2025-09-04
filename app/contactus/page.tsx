@@ -1,0 +1,244 @@
+"use client";
+
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
+import {
+  Phone,
+  Mail,
+  Instagram,
+  Clock,
+  MapPin,
+  Zap,
+  Package,
+  CreditCard,
+  Headphones,
+} from "lucide-react";
+
+export default function ContactPage() {
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("loading");
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    try {
+      const response = await fetch("https://formspree.io/f/mzzvlrva", {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+
+      if (response.ok) {
+        setStatus("success");
+        form.reset();
+      } else {
+        setStatus("error");
+      }
+    } catch (err) {
+      setStatus("error");
+    }
+  }
+
+  return (
+    <main
+      className="relative min-h-screen bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage:
+          "url('https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=1920&q=80')",
+      }}
+    >
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/70" />
+      <Header />
+
+      {/* Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 lg:py-28">
+        <h1 className="text-4xl md:text-5xl font-bold text-center text-white mb-12">
+          Contact Us
+        </h1>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16">
+          {/* LEFT SIDE - Why Choose Us + Contact */}
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 md:p-8 text-white shadow-lg space-y-8">
+            <div>
+              <h2 className="text-2xl font-semibold mb-4">
+                Why Choose OTW Delivery & Distribution?
+              </h2>
+              <ul className="space-y-3 text-sm leading-relaxed">
+                <li className="flex items-center gap-2">
+                  <Zap className="h-5 w-5 text-green-400" />
+                  Fast & Reliable Delivery – On time, every time.
+                </li>
+                <li className="flex items-center gap-2">
+                  <Package className="h-5 w-5 text-green-400" />
+                  Wide Range of Services – From courier to food & gifts.
+                </li>
+                <li className="flex items-center gap-2">
+                  <Clock className="h-5 w-5 text-green-400" />
+                  24/7 Service – Always available when you need us.
+                </li>
+                <li className="flex items-center gap-2">
+                  <CreditCard className="h-5 w-5 text-green-400" />
+                  Easy Payment Options – Credit, debit, and ACH supported.
+                </li>
+                <li className="flex items-center gap-2">
+                  <Headphones className="h-5 w-5 text-green-400" />
+                  Friendly Support – We’re here whenever you need us.
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-2xl font-semibold mb-4">Contact</h3>
+              <ul className="space-y-3 text-sm">
+                <li className="flex items-center gap-2">
+                  <Phone className="h-5 w-5 text-green-400" />
+                  (786) 823-1032
+                </li>
+                <li className="flex items-center gap-2">
+                  <Mail className="h-5 w-5 text-green-400" />
+                  otwdelivered@gmail.com
+                </li>
+                <li className="flex items-center gap-2">
+                  <Clock className="h-5 w-5 text-green-400" />
+                  Available 24 hours a day, 7 days a week
+                </li>
+                <li className="flex items-center gap-2">
+                  <MapPin className="h-5 w-5 text-green-400" />
+                  Serving Miami Dade and Broward County
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* RIGHT SIDE - FORM */}
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-lg p-6 md:p-8 text-white">
+            <h2 className="text-2xl font-semibold mb-6">Book a Delivery</h2>
+
+            {status === "success" ? (
+              <p className="text-green-400 font-medium">
+                ✅ Thank you! Your booking request has been submitted.
+              </p>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Your Name"
+                  required
+                  className="w-full border border-white/30 bg-white/10 
+                  placeholder-white/70 rounded-lg p-3"
+                />
+
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Phone Number"
+                  required
+                  className="w-full border border-white/30 bg-white/10 
+                  placeholder-white/70 rounded-lg p-3"
+                />
+
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email Address"
+                  required
+                  className="w-full border border-white/30 bg-white/10 
+                  placeholder-white/70 rounded-lg p-3"
+                />
+
+                <select
+                  name="service"
+                  required
+                  className="w-full border border-white/30 bg-white/10 
+                  text-white rounded-lg p-3"
+                >
+                  <option value="" className="bg-black">
+                    Select Service Needed
+                  </option>
+                  <option value="courier" className="bg-black">
+                    Courier Service
+                  </option>
+                  <option value="food" className="bg-black">
+                    Food Delivery
+                  </option>
+                  <option value="floral" className="bg-black">
+                    Floral & Gift Delivery
+                  </option>
+                  <option value="office" className="bg-black">
+                    Office Supplies Delivery
+                  </option>
+                </select>
+
+                <input
+                  type="text"
+                  name="pickup_address"
+                  placeholder="Pickup Address (if applicable)"
+                  className="w-full border border-white/30 bg-white/10 
+                  placeholder-white/70 rounded-lg p-3"
+                />
+
+                <input
+                  type="text"
+                  name="dropoff_address"
+                  placeholder="Drop-off Address"
+                  required
+                  className="w-full border border-white/30 bg-white/10 
+                  placeholder-white/70 rounded-lg p-3"
+                />
+
+                <input
+                  type="date"
+                  name="delivery_date"
+                  required
+                  className="w-full border border-white/30 bg-white/10 
+                  placeholder-white/70 rounded-lg p-3"
+                />
+
+                <div className="flex gap-6 items-center text-sm">
+                  <label className="flex items-center gap-2">
+                    <input
+                      type="radio"
+                      name="preference"
+                      value="front_door"
+                      required
+                    />
+                    Front Door
+                  </label>
+                  <label className="flex items-center gap-2">
+                    <input type="radio" name="preference" value="in_person" />
+                    In Person
+                  </label>
+                </div>
+
+                <Button
+                  type="submit"
+                  disabled={status === "loading"}
+                  className="w-full bg-[#51ae16] text-white hover:bg-[#3d8c13] 
+                  rounded-lg p-3 mt-4"
+                >
+                  {status === "loading" ? "Submitting..." : "Submit"}
+                </Button>
+              </form>
+            )}
+
+            {status === "error" && (
+              <p className="text-red-400 font-medium mt-2">
+                ❌ Oops! Something went wrong. Please try again.
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
+      <Footer />
+    </main>
+  );
+}

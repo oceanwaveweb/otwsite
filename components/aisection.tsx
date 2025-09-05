@@ -110,7 +110,7 @@ export default function AISection() {
   }, []);
 
   return (
-    <section className="py-24 hidden md:block md:py-32 relative">
+    <section className="py-24 md:py-32 relative">
       <Image
         src="/dora.png"
         alt="Background"

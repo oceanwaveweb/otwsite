@@ -45,7 +45,7 @@ export default function Services() {
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
-    <section ref={ref} id="services" className="pb-20 pt-20 md:pt-0 z-40">
+    <section ref={ref} id="services" className="pb-20 z-40">
       <div className="container-custom z-40">
         <motion.h2
           initial={{ opacity: 1, y: 20 }}

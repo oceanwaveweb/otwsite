@@ -58,7 +58,7 @@ export default function Home() {
   return (
     <main className="min-h-screen relative bg-black">
       <Image
-        src="/doraatheexplorer.png"
+        src="/dora.png"
         alt="Background"
         fill
         quality={100}

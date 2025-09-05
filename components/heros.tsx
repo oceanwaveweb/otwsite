@@ -86,7 +86,7 @@ export default function HeroS() {
               />
               Deliver{" "}
             </span>{" "}
-            the <br className="hidden md:block" />
+            your <br className="hidden md:block" />
             packages with OTW
           </h1>
           <p className="text-xl md:text-2xl  -600 mb-8 max-w-3xl mx-auto leading-relaxed capitalize">

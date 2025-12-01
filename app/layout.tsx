@@ -7,6 +7,10 @@ import Image from "next/image";
 export const metadata: Metadata = {
   title: "OTW Delivery Services",
   description: "Fast, reliable, and affordable delivery services.",
+  icons: {
+  icon: "/favicon.ico", // <-- important: leading slash
+  shortcut: "/favicon.ico",
+  },
 }
 
 export default function RootLayout({
@@ -16,6 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+            <head>
+        <link rel="icon" href="/favicon.ico" />
+        {/* no <head /> empty tag — we want explicit links */}
+      </head>
       <body className="font-satoshi">
         <ThemeProvider
           attribute="class"

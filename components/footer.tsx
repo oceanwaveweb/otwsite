@@ -102,6 +102,14 @@ export default function Footer() {
                 />
               </Link>
             </p>
+            <p className="mt-2 text-xs">
+              <Link
+                href="/accessibility"
+                className="text-white hover:underline uppercase opacity-70"
+              >
+                Accessibility Statement
+              </Link>
+            </p>
           </div>
         </div>
       </div>
